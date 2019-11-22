@@ -1,0 +1,12 @@
+*.o
+a.out
+*~
+libmy.a
+*.gcda
+*.gcno
+vgcore.*
+test.c
+test
+*.sublime-*
+unit_tests
+my_screensaver
