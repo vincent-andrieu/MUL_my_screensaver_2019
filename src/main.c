@@ -32,7 +32,8 @@ bool does_kill_prog(sfRenderWindow *window)
             sfRenderWindow_close(window);
             return true;
         }
-        if (sfKeyboard_isKeyPressed(sfKeyLeft) || sfKeyboard_isKeyPressed(sfKeyRight))
+        if (sfKeyboard_isKeyPressed(sfKeyLeft)
+        || sfKeyboard_isKeyPressed(sfKeyRight))
             return true;
     }
     return false;
@@ -41,7 +42,7 @@ bool does_kill_prog(sfRenderWindow *window)
 static int show_window(assets_t *assets, int game_id)
 {
     sfEvent event;
-    int (*game_list[1])(assets_t*) = {dots_trail};
+    int (*game_list[2])(assets_t *) = {dots_trail, game_of_life};
 
     srand(time(NULL));
     game_list[game_id - 1](assets);
@@ -72,7 +73,7 @@ int prepare_window(int game_id)
     assets->framebuffer = framebuffer_create(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     if (assets->window == NULL || assets->texture == NULL)
-        return EXIT_ERROR;
+        return EXIT_FAILURE;
     sfSprite_setTexture(assets->sprite, assets->texture, sfTrue);
     sfRenderWindow_setFramerateLimit(assets->window, 30);
     while (sfRenderWindow_isOpen(assets->window))
@@ -97,6 +98,8 @@ int main(int argc, char **argv)
         game_id = my_getnbr(argv[1]);
         if (game_id >= 1 && game_id <= MAX_ID)
             return prepare_window(game_id);
+        my_put_error_str(MSG_ANIM_ID_ERROR);
+        return EXIT_ANIM_ID_ERROR;
     }
     my_put_error_str(MSG_INVALID_ARG_TYPE);
     return EXIT_INVALID_ARG_TYPE;

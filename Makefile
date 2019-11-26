@@ -7,7 +7,8 @@
 
 SRC	=	src/main.c	\
 		src/dots_trail/dots_trail.c	\
-		src/dots_trail/dt_functions.c
+		src/dots_trail/dt_functions.c	\
+		src/game_of_life/game_of_life.c
 
 OBJ	=	$(SRC:.c=.o)
 

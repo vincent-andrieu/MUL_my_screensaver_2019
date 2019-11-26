@@ -9,6 +9,22 @@
 #include <SFML/Graphics.h>
 #include "graph.h"
 
+#ifndef MY_SCREENSAVER_H_
+#define MY_SCREENSAVER_H_
+
+#define MSG_INVALID_ARG_NBR "Invalid arguments number\n"
+#define EXIT_INVALID_ARG_NBR 84
+#define MSG_INVALID_ARG_TYPE "The first argument isn't a number\n"
+#define EXIT_INVALID_ARG_TYPE 84
+#define MSG_ANIM_ID_ERROR "The second number isn't an animation\n"
+#define EXIT_ANIM_ID_ERROR 84
+
+#define MAX_ID 2
+#define NBR_COLORS 0xffffffff
+
+#endif
+
+
 #ifndef DOTS_TRAIL_H_
 #define DOTS_TRAIL_H_
 
@@ -35,16 +51,17 @@ void reset_dot_pos(dots_t *dot);
 
 #endif
 
-#ifndef MY_SCREENSAVER_H_
-#define MY_SCREENSAVER_H_
 
-#define MSG_INVALID_ARG_NBR "Invalid arguments number\n"
-#define EXIT_INVALID_ARG_NBR 84
-#define MSG_INVALID_ARG_TYPE "The first argument isn't a number"
-#define EXIT_INVALID_ARG_TYPE 84
-#define EXIT_ERROR 84
+#ifndef GAME_OF_LIFE_H_
+#define GAME_OF_LIFE_H_
 
-#define MAX_ID 1
-#define NBR_COLORS 0xffffffff
+#define CELL_NBR 200000
+#define CELL_DEAD sfBlack
+#define CELL_INCIPIENT sfGreen
+#define CELL_ALIVE sfBlue
+#define CELL_ONE_TIME sfYellow
+#define CELL_DYING sfRed
+
+int game_of_life(assets_t *assets);
 
 #endif
