@@ -14,13 +14,6 @@
 #include "graph.h"
 #include "my_screensaver.h"
 
-static bool is_eq_color(sfColor color1, sfColor color2)
-{
-    if (color1.r == color2.r && color1.g == color2.g && color1.b == color2.b)
-        return true;
-    return false;
-}
-
 static void put_alive(framebuffer_t *framebuffer, unsigned int x,
                         unsigned int y)
 {
@@ -37,19 +30,6 @@ static void put_dead(framebuffer_t *framebuffer, unsigned int x,
         my_put_pixel(framebuffer, x, y, CELL_ONE_TIME);
     else if (is_eq_color(my_get_pixel_color(framebuffer, x, y), CELL_ALIVE))
         my_put_pixel(framebuffer, x, y, CELL_DYING);
-}
-
-static int count_alive_cells(bool **board, unsigned int x, unsigned int y)
-{
-    int cells_alive = 0;
-
-    for (unsigned int i = x - 1; i <= x + 1; i++) {
-        for (unsigned int j = y - 1; j <= y + 1; j++)
-            if (i < WINDOW_WIDTH && j < WINDOW_HEIGHT && board[i][j]
-                && (i != x || j != y))
-                cells_alive++;
-    }
-    return cells_alive;
 }
 
 static void run_cells(assets_t *assets, bool **board)
@@ -86,13 +66,6 @@ static void kill_cells(framebuffer_t *framebuffer, bool **board)
              }
 }
 
-static void free_tab(bool **board)
-{
-    for (int i = 0; i < WINDOW_WIDTH; i++)
-        free(board[i]);
-    free(board);
-}
-
 int game_of_life(assets_t *assets)
 {
     bool **board = malloc(sizeof(bool *) * WINDOW_WIDTH);
@@ -112,6 +85,6 @@ int game_of_life(assets_t *assets)
         run_cells(assets, board);
         kill_cells(assets->framebuffer, board);
     }
-    free_tab(board);
+    free_board(board);
     return 0;
 }
