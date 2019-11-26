@@ -90,7 +90,7 @@ int dots_trail(assets_t *assets)
     dots_t *dots = create_dots();
 
     if (dots == NULL)
-        return EXIT_ERROR;
+        return EXIT_FAILURE;
     trail(assets, dots);
     free_dots(dots);
     return 0;

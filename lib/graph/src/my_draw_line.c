@@ -36,8 +36,7 @@ void my_draw_line(framebuffer_t *framebuffer, sfVector2f point_a,
         for (float x = point_a.x; x <= point_b.x; x++) {
             coords_p = (sfVector2f) {x, point_a.y + dy * (x - point_a.x) / dx};
             my_draw_rect(framebuffer, coords_p, (sfVector2f) {1,
-                point_a.y == point_b.y ? 1 :
-                (point_a.y + dy * (x + 1 - point_a.x) / dx) - coords_p.y
-                }, color);
+                point_a.y == point_b.y ? 1 : (point_a.y + dy
+                * (x + 1 - point_a.x) / dx) - coords_p.y}, color);
         }
 }
