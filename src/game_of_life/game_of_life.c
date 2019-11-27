@@ -3,9 +3,6 @@
 ** my_screensaver
 ** File description:
 ** game of life
-** == 3 then ALIVE
-** == 2 then NO_CHANGE
-** < 2 || > 3 then DEAD
 */
 
 #include <stdlib.h>
