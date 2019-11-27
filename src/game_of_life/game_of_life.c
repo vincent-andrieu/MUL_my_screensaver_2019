@@ -66,9 +66,10 @@ static void kill_cells(framebuffer_t *framebuffer, bool **board)
              }
 }
 
-int game_of_life(assets_t *assets)
+int game_of_life(assets_t *assets, int game_id)
 {
     bool **board = malloc(sizeof(bool *) * WINDOW_WIDTH);
+    int const last_game_id = game_id;
 
     if (board == NULL)
         return EXIT_FAILURE;
@@ -81,10 +82,11 @@ int game_of_life(assets_t *assets)
     }
     for (int i = 0; i < CELL_NBR; i++)
         board[rand() % WINDOW_WIDTH][rand() % WINDOW_HEIGHT] = true;
-    while (!does_kill_prog(assets->window)) {
+    while (game_id == last_game_id) {
         run_cells(assets, board);
         kill_cells(assets->framebuffer, board);
+        game_id = does_kill_prog(assets->window, game_id);
     }
     free_board(board);
-    return 0;
+    return game_id;
 }

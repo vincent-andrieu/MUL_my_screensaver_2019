@@ -42,8 +42,8 @@ typedef struct dots_s
     sfColor color;
 } dots_t;
 
-bool does_kill_prog(sfRenderWindow *window);
-int dots_trail(assets_t *assets);
+int does_kill_prog(sfRenderWindow *window, int game_id);
+int dots_trail(assets_t *assets, int game_id);
 
 void free_dots(dots_t *dots);
 int *insert_tab_value(int *tab, int radius, int size);
@@ -62,7 +62,7 @@ void reset_dot_pos(dots_t *dot);
 #define CELL_ONE_TIME sfYellow
 #define CELL_DYING sfRed
 
-int game_of_life(assets_t *assets);
+int game_of_life(assets_t *assets, int game_id);
 bool is_eq_color(sfColor color1, sfColor color2);
 int count_alive_cells(bool **board, unsigned int x, unsigned int y);
 void free_board(bool **board);

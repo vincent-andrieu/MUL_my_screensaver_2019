@@ -44,13 +44,14 @@ static float change_angle(float angle, dots_t *dots, assets_t *assets)
     return angle;
 }
 
-static void trail(assets_t *assets, dots_t *dots)
+static int trail(assets_t *assets, dots_t *dots, int game_id)
 {
+    int const last_game_id = game_id;
     float angle = 360;
     float x;
     float y;
 
-    while (!does_kill_prog(assets->window)) {
+    while (game_id == last_game_id) {
         for (int i = 0; i < DOTS_NBR; i++) {
             x = dots[i].radius * cos(angle * M_PI / 180);
             y = dots[i].radius * sin(angle * M_PI / 180);
@@ -59,7 +60,9 @@ static void trail(assets_t *assets, dots_t *dots)
                 (sfVector2f) {5, 5}, dots[i].color);
         }
         angle = change_angle(angle, dots, assets);
+        game_id = does_kill_prog(assets->window, game_id);
     }
+    return game_id;
 }
 
 static dots_t *create_dots(void)
@@ -85,13 +88,13 @@ static dots_t *create_dots(void)
     return dots;
 }
 
-int dots_trail(assets_t *assets)
+int dots_trail(assets_t *assets, int game_id)
 {
     dots_t *dots = create_dots();
 
     if (dots == NULL)
         return EXIT_FAILURE;
-    trail(assets, dots);
+    game_id = trail(assets, dots, game_id);
     free_dots(dots);
-    return 0;
+    return game_id;
 }

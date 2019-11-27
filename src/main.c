@@ -6,7 +6,6 @@
 */
 
 #include <stdlib.h>
-#include <stdbool.h>
 #include <SFML/Graphics.h>
 #include <fcntl.h>
 #include <time.h>
@@ -14,46 +13,43 @@
 #include "graph.h"
 #include "my_screensaver.h"
 
-static bool is_key_released(sfKeyCode key)
-{
-    while (sfKeyboard_isKeyPressed(key)) {
-        if (!sfKeyboard_isKeyPressed(key))
-            return true;
-    }
-    return false;
-}
-
-bool does_kill_prog(sfRenderWindow *window)
+int does_kill_prog(sfRenderWindow *window, int game_id)
 {
     sfEvent event;
 
     while (sfRenderWindow_pollEvent(window, &event)) {
-        if (event.type == sfEvtClosed || sfKeyboard_isKeyPressed(sfKeyEscape)) {
+        if (event.type == sfEvtClosed || (event.type == sfEvtKeyReleased
+        && event.key.code == sfKeyEscape)) {
             sfRenderWindow_close(window);
-            return true;
+            return 0;
         }
-        if (sfKeyboard_isKeyPressed(sfKeyLeft)
-        || sfKeyboard_isKeyPressed(sfKeyRight))
-            return true;
+        if (event.type == sfEvtKeyReleased && event.key.code == sfKeyLeft)
+            return game_id <= 1 ? MAX_ID : game_id - 1;
+        if (event.type == sfEvtKeyReleased && event.key.code == sfKeyRight)
+            return game_id >= MAX_ID ? 1 : game_id + 1;
     }
-    return false;
+    return game_id;
+}
+
+static void clear_screen(assets_t *assets)
+{
+    for (unsigned int i = 0;
+    i < assets->framebuffer->width * assets->framebuffer->height * 4; i++)
+        assets->framebuffer->pixels[i] = 0;
 }
 
 static int show_window(assets_t *assets, int game_id)
 {
     sfEvent event;
-    int (*game_list[2])(assets_t *) = {dots_trail, game_of_life};
+    int (*game_list[2])(assets_t *, int) = {dots_trail, game_of_life};
 
     srand(time(NULL));
-    game_list[game_id - 1](assets);
-    while (sfRenderWindow_pollEvent(assets->window, &event)) {
-        if (event.type == sfEvtClosed || sfKeyboard_isKeyPressed(sfKeyEscape))
+    game_id = game_list[game_id - 1](assets, game_id);
+    while (sfRenderWindow_pollEvent(assets->window, &event))
+        if (game_id < 1 || game_id > MAX_ID || event.type == sfEvtClosed
+        || sfKeyboard_isKeyPressed(sfKeyEscape))
             sfRenderWindow_close(assets->window);
-        if (is_key_released(sfKeyLeft))
-            game_id = game_id <= 0 ? MAX_ID : game_id - 1;
-        else if (is_key_released(sfKeyRight))
-            game_id = game_id >= MAX_ID ? 0 : game_id + 1;
-    }
+    clear_screen(assets);
     sfTexture_updateFromPixels(assets->texture, assets->framebuffer->pixels,
                                 WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0);
     sfRenderWindow_clear(assets->window, sfBlack);
