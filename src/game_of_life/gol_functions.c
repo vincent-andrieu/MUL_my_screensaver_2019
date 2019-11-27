@@ -37,3 +37,21 @@ void free_board(bool **board)
         free(board[i]);
     free(board);
 }
+
+bool **create_rand_map(void)
+{
+    bool **board = malloc(sizeof(bool *) * WINDOW_WIDTH);
+
+    if (board == NULL)
+        return NULL;
+    for (int i = 0; i < WINDOW_WIDTH; i++) {
+        board[i] = malloc(sizeof(bool) * WINDOW_HEIGHT);
+        if (board[i] == NULL)
+            return NULL;
+        for (int k = 0; k < WINDOW_HEIGHT; k++)
+            board[i][k] = false;
+    }
+    for (int i = 0; i < CELL_NBR; i++)
+        board[rand() % WINDOW_WIDTH][rand() % WINDOW_HEIGHT] = true;
+    return board;
+}

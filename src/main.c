@@ -63,7 +63,7 @@ int prepare_window(int game_id)
     sfVideoMode mode = {WINDOW_WIDTH, WINDOW_HEIGHT, 32};
     assets_t *assets = malloc(sizeof(assets_t));
     assets->window = sfRenderWindow_create(mode, "MyScreensaver",
-                                                    sfResize | sfClose, NULL);
+                                            sfResize | sfClose, NULL);
     assets->texture = sfTexture_create(WINDOW_WIDTH, WINDOW_HEIGHT);
     assets->sprite = sfSprite_create();
     assets->framebuffer = framebuffer_create(WINDOW_WIDTH, WINDOW_HEIGHT);

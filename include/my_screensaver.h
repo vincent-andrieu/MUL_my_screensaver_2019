@@ -66,5 +66,6 @@ int game_of_life(assets_t *assets, int game_id);
 bool is_eq_color(sfColor color1, sfColor color2);
 int count_alive_cells(bool **board, unsigned int x, unsigned int y);
 void free_board(bool **board);
+bool **create_rand_map(void);
 
 #endif
