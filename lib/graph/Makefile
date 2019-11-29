@@ -12,6 +12,7 @@ SRC	=	src/framebuffer_create.c	\
 		src/my_draw_line.c	\
 		src/my_draw_rhombus.c	\
 		src/my_draw_circle.c	\
+		src/my_draw_batman.c	\
 		src/my_get_pixel_color.c	\
 		src/refresh_screen.c
 
