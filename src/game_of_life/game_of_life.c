@@ -44,10 +44,7 @@ static void run_cells(assets_t *assets, bool **board)
             CELL_INCIPIENT))
                 my_put_pixel(assets->framebuffer, x, y, CELL_ALIVE);
         }
-    sfTexture_updateFromPixels(assets->texture, assets->framebuffer->pixels,
-                               WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0);
-    sfRenderWindow_drawSprite(assets->window, assets->sprite, NULL);
-    sfRenderWindow_display(assets->window);
+    refresh_screen(assets);
 }
 
 static void kill_cells(framebuffer_t *framebuffer, bool **board)
