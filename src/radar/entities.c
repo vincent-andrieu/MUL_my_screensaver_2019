@@ -48,7 +48,8 @@ void fade_entities(framebuffer_t *framebuffer, entities_t **entities)
 {
     for (int i = 0; entities[i] != NULL; i++) {
         my_draw_batman(framebuffer, (sfVector2f) {entities[i]->x,
-            entities[i]->y}, entities[i]->radius, (sfColor) {entities[i]->opacity, entities[i]->opacity, 0, 255});
+            entities[i]->y}, entities[i]->radius,
+            (sfColor) {entities[i]->opacity, entities[i]->opacity, 0, 255});
         entities[i]->opacity -= 2;
         if (entities[i]->opacity <= 0)
             delete_entity_index(entities, i);
