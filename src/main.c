@@ -41,7 +41,7 @@ static void clear_screen(assets_t *assets)
 static int show_window(assets_t *assets, int game_id)
 {
     sfEvent event;
-    int (*game_list[2])(assets_t *, int) = {dots_trail, game_of_life};
+    int (*game_list[3])(assets_t *, int) = {dots_trail, game_of_life, radar};
 
     srand(time(NULL));
     game_id = game_list[game_id - 1](assets, game_id);

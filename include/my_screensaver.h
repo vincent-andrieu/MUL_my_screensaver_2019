@@ -19,7 +19,7 @@
 #define MSG_ANIM_ID_ERROR "The second number isn't an animation\n"
 #define EXIT_ANIM_ID_ERROR 84
 
-#define MAX_ID 2
+#define MAX_ID 3
 #define NBR_COLORS 0xffffffff
 
 #endif
@@ -55,17 +55,57 @@ void reset_dot_pos(dots_t *dot);
 #ifndef GAME_OF_LIFE_H_
 #define GAME_OF_LIFE_H_
 
-#define CELL_NBR 200000
-#define CELL_DEAD sfBlack
-#define CELL_INCIPIENT sfGreen
-#define CELL_ALIVE sfBlue
-#define CELL_ONE_TIME sfYellow
+#define CELL_NBR 20000
+#define CELL_SIZE 4
+#define CELL_DEAD (sfColor) {0, 153, 51, 255}
+#define CELL_INCIPIENT (sfColor) {255, 255, 0, 255}
+#define CELL_ALIVE (sfColor) {51, 102, 0, 255}
+#define CELL_ONE_TIME (sfColor) {255, 0, 255, 255}
 #define CELL_DYING sfRed
 
 int game_of_life(assets_t *assets, int game_id);
+void fill_background(framebuffer_t *framebuffer, sfColor color);
 bool is_eq_color(sfColor color1, sfColor color2);
 int count_alive_cells(bool **board, unsigned int x, unsigned int y);
 void free_board(bool **board);
 bool **create_rand_map(void);
+
+#endif
+
+
+#ifndef RADAR_H_
+#define RADAR_H_
+
+#define DEF_SCAN_SPEED 10
+#define SCAN_FADE_SIZE 12
+#define LINE_SIZE 10
+#define SCAN_COLOR sfGreen
+#define ENTITY_SPAWN_INDEX 12
+#define ENTITY_COLOR sfBlack
+#define ENTITY_RADIUS_MIN 10
+#define ENTITY_RADIUS_MAX 30
+#define ENTITY_SPAWN_PERCENT 3
+
+typedef struct scan_s
+{
+    int dest_x;
+    int dest_y;
+    sfColor color;
+} scan_t;
+
+typedef struct entities_s
+{
+    int x;
+    int y;
+    int radius;
+    int opacity;
+} entities_t;
+
+int radar(assets_t *assets, int game_id);
+void fill_scan_struct(scan_t **scans);
+void scans_rot(framebuffer_t *framebuffer, scan_t **scans);
+entities_t **create_entities(void);
+entities_t **get_entity(scan_t **scans, entities_t **entities);
+void fade_entities(framebuffer_t *framebuffer, entities_t **entities);
 
 #endif
