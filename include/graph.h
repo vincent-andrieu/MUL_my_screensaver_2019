@@ -11,7 +11,7 @@
 #define GRAPH_H_
 
 #define WINDOW_HEIGHT 1080
-#define WINDOW_WIDTH 1900
+#define WINDOW_WIDTH 1920
 
 typedef struct framebuffer_s {
     unsigned int width;
@@ -40,5 +40,6 @@ void my_draw_circle(framebuffer_t *framebuffer, sfVector2f coord, int radius,
                     sfColor color);
 sfColor my_get_pixel_color(framebuffer_t *framebuffer, unsigned int x,
                     unsigned int y);
+void refresh_screen(assets_t *assets);
 
 #endif
