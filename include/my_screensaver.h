@@ -16,11 +16,16 @@
 #define EXIT_INVALID_ARG_NBR 84
 #define MSG_INVALID_ARG_TYPE "The first argument isn't a number\n"
 #define EXIT_INVALID_ARG_TYPE 84
-#define MSG_ANIM_ID_ERROR "The second number isn't an animation\n"
+#define MSG_ANIM_ID_ERROR "The second number isn't an animation ID\n"
 #define EXIT_ANIM_ID_ERROR 84
+#define USAGE_HEADER_PATH "src/usage/header.txt"
+#define USAGE_DESCRIPTION_PATH "src/usage/description.txt"
 
 #define MAX_ID 3
 #define NBR_COLORS 0xffffffff
+
+int usage(int exit_value, char *filepath);
+int invalid_arg_nbr(int exit_value, int argc, char *binary_name);
 
 #endif
 

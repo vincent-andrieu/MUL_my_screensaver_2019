@@ -80,17 +80,19 @@ int prepare_window(int game_id)
     sfTexture_destroy(assets->texture);
     sfRenderWindow_destroy(assets->window);
     free(assets);
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 int main(int argc, char **argv)
 {
     int game_id;
 
-    if (argc != 2) {
-        my_put_error_str(MSG_INVALID_ARG_NBR);
-        return EXIT_INVALID_ARG_NBR;
-    }
+    if (argc != 2)
+        return invalid_arg_nbr(EXIT_INVALID_ARG_NBR, argc, argv[0]);
+    if (!my_strcmp(argv[1], "-h"))
+        return usage(EXIT_SUCCESS, USAGE_HEADER_PATH);
+    if (!my_strcmp(argv[1], "-d"))
+        return usage(EXIT_SUCCESS, USAGE_DESCRIPTION_PATH);
     if (my_str_isnum(argv[1])) {
         game_id = my_getnbr(argv[1]);
         if (game_id >= 1 && game_id <= MAX_ID)

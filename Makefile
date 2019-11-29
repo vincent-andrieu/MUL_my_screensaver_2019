@@ -12,13 +12,14 @@ SRC	=	src/main.c	\
 		src/game_of_life/gol_functions.c	\
 		src/radar/radar.c	\
 		src/radar/entities.c	\
-		src/radar/scan.c
+		src/radar/scan.c	\
+		src/usage/usage.c
 
 OBJ	=	$(SRC:.c=.o)
 
 NAME	=	my_screensaver
 
-CFLAGS	+=	-I include -Wall -Wextra -g
+CFLAGS	+=	-I include -Wall -Wextra
 LDFLAGS +=	-L lib/my -lmy -L lib/graph -lgraph -lm
 
 CC	=	gcc -l csfml-graphics -l csfml-system -l csfml-window
