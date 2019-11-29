@@ -12,6 +12,7 @@
 
 #define WINDOW_HEIGHT 1080
 #define WINDOW_WIDTH 1920
+#define BACKGROUND_COLOR sfBlack
 
 typedef struct framebuffer_s {
     unsigned int width;
@@ -44,5 +45,6 @@ void my_draw_batman(framebuffer_t *fb, vec co, int radius, sfColor c);
 sfColor my_get_pixel_color(framebuffer_t *framebuffer, unsigned int x,
                     unsigned int y);
 void refresh_screen(assets_t *assets);
+void fill_background(framebuffer_t *framebuffer, sfColor color);
 
 #endif

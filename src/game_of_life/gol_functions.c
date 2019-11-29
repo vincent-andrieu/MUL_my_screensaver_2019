@@ -56,10 +56,3 @@ bool **create_rand_map(void)
             [rand() % (WINDOW_HEIGHT / CELL_SIZE) * CELL_SIZE] = true;
     return board;
 }
-
-void fill_background(framebuffer_t *framebuffer, sfColor color)
-{
-    for (int y = 0; y < WINDOW_HEIGHT; y++)
-        for (int x = 0; x < WINDOW_WIDTH; x++)
-            my_put_pixel(framebuffer, x, y, color);
-}

@@ -44,6 +44,7 @@ static int show_window(assets_t *assets, int game_id)
     int (*game_list[3])(assets_t *, int) = {dots_trail, game_of_life, radar};
 
     srand(time(NULL));
+    fill_background(assets->framebuffer, BACKGROUND_COLOR);
     game_id = game_list[game_id - 1](assets, game_id);
     while (sfRenderWindow_pollEvent(assets->window, &event))
         if (game_id < 1 || game_id > MAX_ID || event.type == sfEvtClosed

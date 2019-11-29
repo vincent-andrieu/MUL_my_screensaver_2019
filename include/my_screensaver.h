@@ -64,7 +64,6 @@ void reset_dot_pos(dots_t *dot);
 #define CELL_DYING sfRed
 
 int game_of_life(assets_t *assets, int game_id);
-void fill_background(framebuffer_t *framebuffer, sfColor color);
 bool is_eq_color(sfColor color1, sfColor color2);
 int count_alive_cells(bool **board, unsigned int x, unsigned int y);
 void free_board(bool **board);
