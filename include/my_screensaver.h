@@ -88,7 +88,7 @@ bool **create_rand_map(void);
 #define ENTITY_COLOR sfBlack
 #define ENTITY_RADIUS_MIN 10
 #define ENTITY_RADIUS_MAX 30
-#define ENTITY_SPAWN_PERCENT 3
+#define ENTITY_SPAWN_PERCENT 2
 
 typedef struct scan_s
 {
