@@ -48,7 +48,7 @@ static int show_window(assets_t *assets, int game_id)
     game_id = game_list[game_id - 1](assets, game_id);
     while (sfRenderWindow_pollEvent(assets->window, &event))
         if (game_id < 1 || game_id > MAX_ID || event.type == sfEvtClosed
-        || sfKeyboard_isKeyPressed(sfKeyEscape))
+        || event.key.code == sfKeyEscape)
             sfRenderWindow_close(assets->window);
     clear_screen(assets);
     sfTexture_updateFromPixels(assets->texture, assets->framebuffer->pixels,
