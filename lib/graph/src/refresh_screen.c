@@ -11,7 +11,7 @@
 void refresh_screen(assets_t *assets)
 {
     sfTexture_updateFromPixels(assets->texture, assets->framebuffer->pixels,
-                               WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0);
+    WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0);
     sfRenderWindow_drawSprite(assets->window, assets->sprite, NULL);
     sfRenderWindow_display(assets->window);
 }
