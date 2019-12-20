@@ -44,7 +44,8 @@ static void run_cells(assets_t *assets, bool **board)
                 put_alive(assets->framebuffer, x, y);
             else if (nbr_alives < 2 || nbr_alives > 3)
                 put_dead(assets->framebuffer, x, y);
-            else if (is_eq_color(my_get_pixel_color(assets->framebuffer, x, y),
+            if (nbr_alives != 3 && (nbr_alives == 2 || nbr_alives == 3)
+            && is_eq_color(my_get_pixel_color(assets->framebuffer, x, y),
             CELL_INCIPIENT))
                 my_draw_rect(assets->framebuffer, (sfVector2f) {x, y},
                     (sfVector2f) {CELL_SIZE, CELL_SIZE}, CELL_ALIVE);
