@@ -61,7 +61,7 @@ static void kill_cells(framebuffer_t *framebuffer, bool **board)
             || is_eq_color(my_get_pixel_color(framebuffer, x, y),
                             CELL_ONE_TIME))
                 my_draw_rect(framebuffer, (sfVector2f) {x, y},
-                    (sfVector2f) {CELL_SIZE, CELL_SIZE}, CELL_DEAD);
+                            (sfVector2f) {CELL_SIZE, CELL_SIZE}, CELL_DEAD);
             board[x][y] = !is_eq_color(my_get_pixel_color(framebuffer, x, y),
                                         CELL_DEAD);
             }
