@@ -10,5 +10,5 @@ OPTIONS
 
 USER INTERACTIONS
     LEFT_ARROW          switch to the previous animation.
-    RIGHT_ARROW          switch to the next animation.
+    RIGHT_ARROW         switch to the next animation.
 
